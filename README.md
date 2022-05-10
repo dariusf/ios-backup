@@ -1,12 +1,12 @@
 
 Scripts for extracting data from iOS backups.
 
-Assumes Catalina and iOS 13. pandoc is required on the PATH.
+Assumes Big Sur and iOS 14. pandoc is required on the PATH.
 
 # Usage
 
-1. Give your terminal `System Preferences > Security & Privacy > Privacy > Full Disk Access`
-1. Create a local backup of your phone using Finder
+1. [Give](https://apple.stackexchange.com/a/390593) your terminal `System Preferences > Security & Privacy > Privacy > Full Disk Access`
+1. Create an unencrypted local backup of your phone using Finder
 1. `./ios-backup.py` will print a list of backups
 1. `./ios-backup.py <hash>` will export files from the given backup to the current directory
 

@@ -135,7 +135,7 @@ def whatsapp():
               content = f'`could not load media {m["media"]}`'
               print('no file found for media:', m['media'])
           elif m['text']:
-            text = re.sub(r'(https?://[^ ]+)', r'<\1>', m['text'])
+            text = re.sub(r'(https?://\S+)', r'<\1>', m['text'])
             if '\n' in text:
               # "Block content in list items" in pandoc manual. Replaces blank lines first for a tight list.
               paras = re.sub(r'\n\n+', '\n', text).split('\n')
@@ -143,16 +143,16 @@ def whatsapp():
             else:
               content = text
           else:
-            content = '`voice call/E2E encryption notice/deleted message`'
+            content = '`voice call/E2E encryption notice/deleted message/media not downloaded`'
 
-          f.write(f'- `{date.strftime("%I:%M %p")}` **{person}**: {content}\n')
+          f.write(f'`{date.strftime("%I:%M %p")}` **{person}**: {content}<br/>\n')
           message_count += 1
 
     os.system(f'pandoc -s --css pandoc.css --metadata title="{k}" -f markdown-tex_math_dollars -t html "{md_file}" -o "{html_file}"')
     # print(k)
 
   conn.close()
-  print(f'WhatsApp: exported {message_count} messages over {group_count} groups')
+  print(f'WhatsApp: exported {message_count} messages from {group_count} groups')
 
 
 def voice_memos():
